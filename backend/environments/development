@@ -1,0 +1,8 @@
+RAILS_ENV=development
+RAILS_HOST=http://localhost:4000
+
+POSTGRES_HOST=google-scraping-db
+POSTGRES_PORT=5432
+POSTGRES_DB=google_scraping_development
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres

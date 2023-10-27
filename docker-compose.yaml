@@ -1,0 +1,33 @@
+version: '3.9'
+
+volumes:
+  google-scraping-db:
+
+networks:
+  default:
+    name: google-scraping
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: google-scraping-db
+    env_file: backend/environments/development
+    volumes:
+      - google-scraping-db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    restart: always
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: google-scraping-backend
+    env_file: backend/environments/development
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+    ports:
+      - 4000:4000
+    command: ["rails", "s", "-p", "4000", "-b", "0.0.0.0"]
+    restart: always

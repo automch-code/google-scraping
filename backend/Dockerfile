@@ -1,15 +1,11 @@
-FROM ruby:3.2.2-alpine3.18
+FROM ruby:3.2.2-bullseye
 
-RUN apk update -qq && \
-    apk add make gcc g++ musl-dev vips postgresql-dev postgresql-client tzdata
-
+RUN apt-get update -qq && apt install -y libvips
 WORKDIR /app
 COPY backend/Gemfile /app/Gemfile
 COPY backend/Gemfile.lock /app/Gemfile.lock
-RUN bundle install --jobs=8
+RUN bundle install
 
-COPY backend/entrypoint.sh /usr/bin/entrypoint.sh
+COPY backend/entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
-
-EXPOSE 4000

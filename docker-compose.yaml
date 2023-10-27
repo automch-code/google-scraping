@@ -21,6 +21,7 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile
+    image: google-scraping-backend
     container_name: google-scraping-backend
     env_file: backend/environments/development
     depends_on:
@@ -29,5 +30,5 @@ services:
       - .:/app
     ports:
       - 4000:4000
-    command: ["rails", "s", "-p", "4000", "-b", "0.0.0.0"]
+    command: ["backend/bin/rails", "s", "-p", "4000", "-b", "0.0.0.0"]
     restart: always

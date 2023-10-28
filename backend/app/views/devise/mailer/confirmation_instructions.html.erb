@@ -1,0 +1,9 @@
+<p>Welcome <%= @user.nil? %></p>
+
+<p>You can confirm your account email through the link below:</p>
+
+<p>
+  <a href="<%= "#{ENV['FRONTEND_ENDPOINT']}/redirect?to=confirmation?confirmation_token=#{@token}" %>" target="_blank" rel="noopener noreferrer">
+    Confirm my account
+  </a>
+</p>

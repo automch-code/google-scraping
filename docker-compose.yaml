@@ -17,18 +17,31 @@ services:
     ports:
       - 5432:5432
     restart: always
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        - NODE_ENV=${NODE_ENV:-development}
+    container_name: frontend
+    env_file: frontend/environments/development
+    volumes:
+      - ./frontend:/app
+    ports:
+      - 3000:3000
+    command: ["pnpm", "dev"]
+    restart: always
   backend:
     build:
       context: .
       dockerfile: backend/Dockerfile
-    image: google-scraping-backend
     container_name: google-scraping-backend
     env_file: backend/environments/development
     depends_on:
       - db
     volumes:
-      - .:/app
+      - ./backend:/app
     ports:
       - 4000:4000
-    command: ["backend/bin/rails", "s", "-p", "4000", "-b", "0.0.0.0"]
+    command: ["rails", "s", "-p", "4000", "-b", "0.0.0.0"]
     restart: always

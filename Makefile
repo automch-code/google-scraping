@@ -1,4 +1,5 @@
 start:
+	cp frontend/environments/development frontend/.env
 	docker compose up -d
 
 stop:

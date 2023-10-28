@@ -2,8 +2,18 @@ RAILS_ENV=test
 RAILS_HOST=http://localhost:4000
 RAILS_MAX_THREADS=10
 
+CLIENT_ID=s4Ns38Nf_tUbJtcCWl7NY5l3vaMB89r3S0kBMurftgU
+CLIENT_SECRET=wblv9HG05bh05KOsUI1KhteurtU-9hcPP743FdNI4uc
+
 POSTGRES_HOST=localhost
 POSTGRES_PORT=5432
-POSTGRES_DB=tcap_test
+POSTGRES_DB=google_scraping_test
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
+
+SENDER_NAME=g-scraping
+SENDER_EMAIL=<do-not-reply@scraping.com>
+LAUNCHY_DRY_RUN=true
+BROWSER=/dev/null
+
+JWT_SECRET_KEY=o1?|AKh@4iu1WGXJC[t

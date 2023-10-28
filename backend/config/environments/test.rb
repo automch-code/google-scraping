@@ -6,6 +6,12 @@ require "active_support/core_ext/integer/time"
 # and recreated between test runs. Don't rely on the data there!
 
 Rails.application.configure do
+  File.open(Rails.root.join('environments/test'), 'r') do |f|
+    f.each do |line|
+      value = line.split('=').map(&:strip)
+      ENV[value[0]] = value[1]
+    end
+  end
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Turn false under Spring and add config.action_view.cache_template_loading = true.
@@ -42,6 +48,7 @@ Rails.application.configure do
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
+  config.action_mailer.default_url_options = { host: ENV['RAILS_HOST'] }
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
@@ -51,6 +58,8 @@ Rails.application.configure do
 
   # Tell Active Support which deprecation messages to disallow.
   config.active_support.disallowed_deprecation_warnings = []
+
+  config.active_job.queue_adapter = :test
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true

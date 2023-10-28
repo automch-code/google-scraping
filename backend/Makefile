@@ -12,3 +12,6 @@ seed:
 
 migrate:
 	docker compose exec backend rails db:migrate
+
+reset-test:
+	rails db:environment:set RAILS_ENV=test db:drop db:create db:migrate

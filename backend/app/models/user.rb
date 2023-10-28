@@ -9,10 +9,13 @@ class User < ApplicationRecord
            dependent: :delete_all
 
   validates :email, format: URI::MailTo::EMAIL_REGEXP
+  validates :email, uniqueness: { case_sensitive: false }
+  validates :email, length: { maximum: 255 }
+
   enum role: %i[user admin]
 
   def self.authenticate(email, password)
-    user = User.find_for_authentication(email: email)
-    user&.valid_password?(password) ? user : nil
+    user = User.find_for_authentication(email:)
+    user&.valid_password?(password) && user&.active_for_authentication? ? user : nil
   end
 end

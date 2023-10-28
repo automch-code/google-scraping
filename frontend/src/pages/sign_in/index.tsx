@@ -6,6 +6,7 @@ import {
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import LoginIcon from '@mui/icons-material/Login';
 import { useSignInMutation } from '@/app/features/App/Api'
 import { useSnackbar } from 'notistack'
 import { useFormik } from 'formik'
@@ -105,7 +106,7 @@ const SignIn: NextPage = () => {
                 sx={{ mt: 3, mb: 2 }}
                 loading={isLoading}
                 loadingPosition="start"
-                startIcon={<SearchIcon />}
+                startIcon={<LoginIcon />}
               >
                 {t('signIn')}
               </LoadingButton>

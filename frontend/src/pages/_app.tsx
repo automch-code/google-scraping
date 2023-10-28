@@ -1,19 +1,28 @@
 import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import type { AppProps, AppContext } from 'next/app'
+import App from 'next/app'
+import { CssBaseline } from '@mui/material'
+import { CacheProvider, EmotionCache } from '@emotion/react'
+import createEmotionCache from '@/createEmotionCache'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { wrapper } from '@/app/store'
 import { CurrentUser } from '@/utils/interface'
 import { useAppDispatch } from "@/app/hooks"
 import { isEmpty } from 'lodash'
+import i18n from '@/locale/i18n'
+import nookies from 'nookies'
 import { setUserState } from '@/app/features/App'
 
+const clientSideEmotionCache = createEmotionCache()
+
 export interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache
   user: {}
 }
 
-function App(props: MyAppProps) {
-  const { Component, pageProps, user } = props
+function MyApp(props: MyAppProps) {
+  const { Component, pageProps, emotionCache = clientSideEmotionCache, user } = props
   const { isReady } = useRouter()
   const dispatch = useAppDispatch()
 
@@ -24,8 +33,25 @@ function App(props: MyAppProps) {
   if (!isReady) return <></>
 
   return (
-    <Component {...pageProps} />
+    <CacheProvider value={emotionCache}>
+      <CssBaseline />
+      <Component {...pageProps} />
+    </CacheProvider>
   )
 }
+
+MyApp.getInitialProps = wrapper.getInitialAppProps(
+  (store) => async (appContext: AppContext) => {
+    const appProps = await App.getInitialProps(appContext)
+    let user = {}
+    try {
+      i18n.changeLanguage(nookies.get(appContext.ctx).i18next)
+      // user = jwt.verify(nookies.get(appContext.ctx).user || '', process.env.JWT_SECRET_KEY || '')
+    }
+    catch (err) { console.log(err) }
+
+    return { ...appProps, user }
+  }
+)
 
 export default wrapper.withRedux(App)

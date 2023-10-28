@@ -1,0 +1,15 @@
+{
+  "translation": {
+    "appName": "Google-Scraping",
+    "signIn": "Sign In",
+    "rememberMe": "Remember me",
+    "toSignUp": "Don't have an account? Sign Up",
+    "forgotPassword?": "Forgot password?",
+    "email": "Email",
+    "password": "Password",
+    "error": {
+      "invalid": "{{name}} invalid.",
+      "blank": "{{name}} can't be blank."
+    }
+  }
+}

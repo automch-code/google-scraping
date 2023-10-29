@@ -33,12 +33,13 @@ RSpec.describe User, type: :model do
   end
 
   describe 'Associations' do
-    it do
-      should(
-        have_many(:access_tokens)
-          .class_name('Doorkeeper::AccessToken').with_foreign_key(:resource_owner_id).dependent(:delete_all)
-      )
-    end
+    it { should have_many(:access_tokens)
+      .class_name('Doorkeeper::AccessToken')
+      .with_foreign_key(:resource_owner_id)
+      .dependent(:delete_all)
+    }
+    it { should have_many(:import_histories) }
+    it { should have_many(:keywords) }
   end
 
   describe 'Method' do

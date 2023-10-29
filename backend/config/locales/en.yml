@@ -30,4 +30,9 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  import_history:
+    processing: "Import '%{filename}' in processing..."
+
+  errors:
+    file_not_found: "File not found."
+    file_type_invalid: "The file format is invalid. (use CSV)"

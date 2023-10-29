@@ -5,7 +5,7 @@ reset-db:
 	docker compose exec backend rails db:drop db:create db:migrate db:seed
 
 rebuild:
-	docker compose up --build -d backend
+	docker compose up --build -d backend sidekiq
 
 seed:
 	docker compose exec backend rails db:seed

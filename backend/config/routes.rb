@@ -16,6 +16,12 @@ Rails.application.routes.draw do
         confirmations: 'api/v1/confirmations' 
       }
 
+      resources :import_histories, only: %i[index] do
+        collection do
+          post :upload
+        end
+      end
+
       resources :users do
         collection do
           post :registration

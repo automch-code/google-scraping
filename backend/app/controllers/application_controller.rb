@@ -15,6 +15,10 @@ class ApplicationController < ActionController::API
     render status: :created, json: data
   end
 
+  def render_accepted(data = { message: t('ok') })
+    render status: :accepted, json: data
+  end
+
   def render_bad_request(data = { message: t('bad_request') })
     render status: :bad_request, json: data
   end
@@ -29,5 +33,12 @@ class ApplicationController < ActionController::API
 
   def strip_params(values)
     values.each_value { |value| value.strip! if value.instance_of?(String) }
+  end
+
+  def log_error(e)
+    Rails.logger.error(e.message)
+    e.backtrace.each do |trace|
+      Rails.logger.error(trace)
+    end
   end
 end

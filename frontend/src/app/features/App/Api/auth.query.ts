@@ -30,12 +30,12 @@ export const authAPI = appAPI.injectEndpoints({
           }
         }),
         invalidatesTags: ['Auth'],
-      }),
+      })
     }
   }
 })
 
 export const {
   useSignInMutation,
-  useRefreshTokenMutation
+  useRefreshTokenMutation,
 } = authAPI

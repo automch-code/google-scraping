@@ -1,15 +1,23 @@
 {
   "translation": {
     "appName": "Google-Scraping",
+    "toSignIn": "Already have an account? Sign in",
     "signIn": "Sign In",
     "rememberMe": "Remember me",
     "toSignUp": "Don't have an account? Sign Up",
     "forgotPassword?": "Forgot password?",
     "email": "Email",
     "password": "Password",
+    "passwordConfirmation": "Password confirmation",
+    "signUp": "Sign Up",
     "error": {
       "invalid": "{{name}} invalid.",
-      "blank": "{{name}} can't be blank."
+      "blank": "{{name}} can't be blank.",
+      "maxlength": "{{name}} must be {{number}} characters or fewer.",
+      "minlength": "{{name}} must be at least {{number}} characters long.",
+      "max": "{{name}} should be less than {{number}}.",
+      "min": "{{name}} should be greater than {{number}}.",
+      "match": "{{name}} not match."
     }
   }
 }

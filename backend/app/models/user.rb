@@ -3,10 +3,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :confirmable, :database_authenticatable, :recoverable, :validatable
   
-  has_many :access_tokens,
-           class_name: 'Doorkeeper::AccessToken',
-           foreign_key: :resource_owner_id,
-           dependent: :delete_all
+  has_many  :access_tokens,
+          class_name: 'Doorkeeper::AccessToken',
+          foreign_key: :resource_owner_id,
+          dependent: :delete_all
+  has_many  :import_histories
+  has_many  :keywords
 
   validates :email, format: URI::MailTo::EMAIL_REGEXP
   validates :email, uniqueness: { case_sensitive: false }

@@ -52,6 +52,17 @@ export const appSlice = createSlice({
         setAccessToken(payload.access_token)
         setRefreshToken(payload.refresh_token)
       }
+    ).addMatcher(
+      authAPI.endpoints.signOut.matchFulfilled,
+      (state) => {
+        state.username = initialState.username
+        state.profile_image = initialState.profile_image
+        state.permissions = initialState.permissions
+        state.role = initialState.role
+        destroyCurrentUser()
+        destroyAccessToken()
+        destroyRefreshToken()
+      }
     )
   }
 })

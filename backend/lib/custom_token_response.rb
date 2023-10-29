@@ -4,8 +4,8 @@ module CustomTokenResponse
     role = @user.role
 
     additional_data = {
-      username: @user.name,
-      role: role.is
+      email: @user.email,
+      role: role
     }
 
     super.merge(user: JWT.encode(additional_data, ENV['JWT_SECRET_KEY'], 'HS256'))

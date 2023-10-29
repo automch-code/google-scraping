@@ -23,3 +23,7 @@ Doorkeeper.configure do
     true
   end
 end
+
+Rails.application.config.to_prepare do
+  Doorkeeper::OAuth::TokenResponse.prepend CustomTokenResponse
+end

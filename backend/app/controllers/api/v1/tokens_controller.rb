@@ -1,6 +1,7 @@
 class Api::V1::TokensController < Doorkeeper::TokensController
   def create
-    unless authorize_response.token.resource_owner&.active?
+
+    unless authorize_response.token.resource_owner.present?
       return render_bad_request(error_description: I18n.t('doorkeeper.errors.messages.inactive_user'))
     end
 

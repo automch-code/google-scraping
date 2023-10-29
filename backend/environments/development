@@ -19,3 +19,5 @@ LAUNCHY_DRY_RUN=true
 BROWSER=/dev/null
 
 JWT_SECRET_KEY=o1?|AKh@4iu1WGXJC[t
+
+SIDEKIQ_REDIS_URL=redis://redis:6379/0

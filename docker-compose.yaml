@@ -17,6 +17,24 @@ services:
     ports:
       - 5432:5432
     restart: always
+  redis:
+    image: redis:7.0-alpine
+    container_name: google-scraping-redis
+    ports:
+      - 6379:6379
+    restart: always
+  sidekiq:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: google-scraping-sidekiq
+    env_file: backend/environments/development
+    depends_on:
+      - redis
+    volumes:
+      - ./backend:/app
+    command: bundle exec sidekiq
+    restart: always
   frontend:
     build:
       context: .

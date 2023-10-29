@@ -6,12 +6,14 @@ import { CacheProvider, EmotionCache } from '@emotion/react'
 import createEmotionCache from '@/createEmotionCache'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import jwt from 'jsonwebtoken'
 import { wrapper } from '@/app/store'
 import { CurrentUser } from '@/utils/interface'
 import { useAppDispatch } from "@/app/hooks"
 import { isEmpty } from 'lodash'
 import i18n from '@/locale/i18n'
 import nookies from 'nookies'
+import NotiStack from '@/components/NotiStack'
 import { setUserState } from '@/app/features/App'
 
 const clientSideEmotionCache = createEmotionCache()
@@ -27,6 +29,7 @@ function MyApp(props: MyAppProps) {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
+    console.log("asdfasf")
     if (!isEmpty(user)) dispatch(setUserState(user as CurrentUser))
   }, [user, dispatch])
 
@@ -34,8 +37,10 @@ function MyApp(props: MyAppProps) {
 
   return (
     <CacheProvider value={emotionCache}>
-      <CssBaseline />
-      <Component {...pageProps} />
+      <NotiStack>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </NotiStack>
     </CacheProvider>
   )
 }
@@ -46,7 +51,7 @@ MyApp.getInitialProps = wrapper.getInitialAppProps(
     let user = {}
     try {
       i18n.changeLanguage(nookies.get(appContext.ctx).i18next)
-      // user = jwt.verify(nookies.get(appContext.ctx).user || '', process.env.JWT_SECRET_KEY || '')
+      user = jwt.verify(nookies.get(appContext.ctx).user || '', process.env.JWT_SECRET_KEY || '')
     }
     catch (err) { console.log(err) }
 

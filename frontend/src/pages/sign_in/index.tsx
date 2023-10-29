@@ -14,7 +14,6 @@ import validationSchema from '@/utils/validations/signIn'
 import { useTranslation } from 'react-i18next'
 import PublicLayout from '@/components/PublicLayout'
 import LoadingButton from '@mui/lab/LoadingButton'
-import SearchIcon from '@mui/icons-material/Search'
 
 const SignIn: NextPage = () => {
   const { t } = useTranslation()

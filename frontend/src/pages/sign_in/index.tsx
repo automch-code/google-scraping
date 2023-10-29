@@ -3,7 +3,7 @@ import type { NextPage } from 'next'
 import {
   Avatar, TextField, FormControlLabel, Checkbox, Link, Box, Grid, Typography, Container, InputAdornment, IconButton
 } from '@mui/material'
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+import GoogleIcon from '@mui/icons-material/Google';
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import LoginIcon from '@mui/icons-material/Login';
@@ -49,7 +49,7 @@ const SignIn: NextPage = () => {
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
+              <GoogleIcon />
             </Avatar>
             <Typography component="h1" variant="h5" sx={{ color: "text.primary" }}>
               {t('signIn')}

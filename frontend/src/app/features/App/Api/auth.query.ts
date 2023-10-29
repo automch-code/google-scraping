@@ -18,6 +18,14 @@ export const authAPI = appAPI.injectEndpoints({
           body: { ...signInBody, ...body  }
         })
       }),
+      signOut: builder.mutation({
+        query: (body) => ({
+          url: '/oauth/revoke',
+          method: 'POST',
+          body: { ...baseBody, ...body }
+        }),
+        invalidatesTags: ['Auth'],
+      }),
       refreshToken: builder.mutation({
         query: () => ({
           url: '/oauth/token',
@@ -37,5 +45,6 @@ export const authAPI = appAPI.injectEndpoints({
 
 export const {
   useSignInMutation,
+  useSignOutMutation,
   useRefreshTokenMutation,
 } = authAPI

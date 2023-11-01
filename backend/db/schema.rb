@@ -54,7 +54,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_29_150942) do
     t.string "word"
     t.integer "adwords"
     t.integer "links"
-    t.integer "results"
+    t.decimal "results"
     t.decimal "speed"
     t.string "rep_adwords"
     t.string "rep_links"
@@ -64,6 +64,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_29_150942) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.index ["user_id"], name: "index_keywords_on_user_id"
+    t.index ["word", "user_id"], name: "index_keywords_on_word_and_user_id", unique: true
   end
 
   create_table "oauth_access_tokens", force: :cascade do |t|

@@ -6,7 +6,7 @@ class CreateKeywords < ActiveRecord::Migration[7.0]
       # sort value
       t.integer :adwords
       t.integer :links
-      t.integer :results
+      t.decimal :results
       t.decimal :speed
       
       # represent value
@@ -19,5 +19,6 @@ class CreateKeywords < ActiveRecord::Migration[7.0]
     end
 
     add_reference :keywords, :user, foreign_key: true, null: true
+    add_index :keywords, [:word, :user_id], unique: true
   end
 end

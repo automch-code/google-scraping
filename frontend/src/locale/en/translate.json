@@ -10,6 +10,13 @@
     "password": "Password",
     "passwordConfirmation": "Password confirmation",
     "signUp": "Sign Up",
+    "keyword": "Keyword",
+    "createDate": "Created at",
+    "updateDate": "Updated at",
+    "results": "Results",
+    "speed": "Speed",
+    "adWords": "AdWords",
+    "links": "Links",
     "error": {
       "invalid": "{{name}} invalid.",
       "blank": "{{name}} can't be blank.",

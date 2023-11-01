@@ -7,6 +7,18 @@ class ApplicationController < ActionController::API
     @current_user ||= User.find_by(id: doorkeeper_token.resource_owner_id) if doorkeeper_token.present?
   end
 
+  def page
+    (params[:page] || 0).to_i
+  end
+
+  def limit
+    (params[:limit] || 15).to_i
+  end
+
+  def offset
+    (page) * limit
+  end
+
   def render_ok(data = { message: t('ok') })
     render status: :ok, json: data
   end

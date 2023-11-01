@@ -6,7 +6,15 @@ active_admin = User.new(
 )
 active_admin.skip_confirmation!
 
+active_user = User.new(
+  email: 'user@example.com',
+  password: 'password',
+  password_confirmation: 'password',
+  role: User.roles[:user]
+)
+active_user.skip_confirmation!
 
-[active_admin].each do |user|
+
+[active_admin, active_user].each do |user|
   user.save!
 end

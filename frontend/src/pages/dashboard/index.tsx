@@ -6,7 +6,7 @@ import { useFormik } from "formik"
 import { useUploadMutation } from "@/app/features/App/Api"
 import { useSnackbar } from "notistack"
 
-const Home: NextPage = () => {
+const Dashboard: NextPage = () => {
   const { enqueueSnackbar } = useSnackbar()
   const [uploadCSV] = useUploadMutation()
   interface response {
@@ -64,4 +64,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default Dashboard

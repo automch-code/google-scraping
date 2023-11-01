@@ -37,8 +37,8 @@ function MyApp(props: MyAppProps) {
 
   return (
     <CacheProvider value={emotionCache}>
+      <CssBaseline />
       <NotiStack>
-        <CssBaseline />
         <Component {...pageProps} />
       </NotiStack>
     </CacheProvider>

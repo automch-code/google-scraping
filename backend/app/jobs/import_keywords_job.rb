@@ -1,3 +1,5 @@
+require 'csv'
+
 class ImportKeywordsJob < ApplicationJob
   queue_as :default
   sidekiq_options retry: 0, tags: ['import_keyword']
@@ -9,9 +11,7 @@ class ImportKeywordsJob < ApplicationJob
     import_history.file.open do |file|
       csv = CSV.read(file)
 
-      #FIXME not a good thing to do for update, find another
-      Keyword.where(word: csv.flatten, user_id: current_user_id).destroy_all
-      Keyword.insert_all(GoogleScraper.call(csv.flatten, current_user_id))
+      Keyword.upsert_all(GoogleScraper.call(csv.flatten, current_user_id), unique_by: %i[word user_id])
     end
   end
 end

@@ -5,11 +5,12 @@ export default async function middleware(req: NextRequest) {
 
   if(req.cookies.has('refresh_token')) {
     const unprotectedRoutes = [
+      '/',
       '/sign_in',
       '/sign_up'
     ]
     if (unprotectedRoutes.includes(url.pathname)) {
-      url.pathname = "/"
+      url.pathname = "/dashboard"
       return NextResponse.redirect(url)
     }
   } else {

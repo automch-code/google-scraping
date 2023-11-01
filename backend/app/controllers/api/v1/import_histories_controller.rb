@@ -1,3 +1,5 @@
+require 'csv'
+
 class Api::V1::ImportHistoriesController < ApplicationController
 
   def index
@@ -8,7 +10,7 @@ class Api::V1::ImportHistoriesController < ApplicationController
   def upload
     return render_bad_request(message: t('errors.file_not_found')) if import_params["file"].nil?
 
-    import_file = import_params["file"]
+    import_file = import_params[:file]
     filename = import_file.original_filename
     return render_bad_request(
       message: t('errors.file_type_invalid')

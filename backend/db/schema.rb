@@ -52,15 +52,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_29_150942) do
 
   create_table "keywords", force: :cascade do |t|
     t.string "word"
-    t.integer "adwords"
-    t.integer "links"
-    t.decimal "results"
-    t.decimal "speed"
-    t.string "rep_adwords"
-    t.string "rep_links"
-    t.string "rep_results"
-    t.string "rep_speed"
-    t.text "html_text"
+    t.integer "adwords", default: 0
+    t.integer "links", default: 0
+    t.decimal "results", default: "0.0"
+    t.decimal "speed", default: "0.0"
+    t.string "rep_adwords", default: ""
+    t.string "rep_links", default: ""
+    t.string "rep_results", default: ""
+    t.string "rep_speed", default: ""
+    t.text "html_text", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"

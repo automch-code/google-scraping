@@ -10,7 +10,7 @@ export default async function middleware(req: NextRequest) {
       '/sign_up'
     ]
     if (unprotectedRoutes.includes(url.pathname)) {
-      url.pathname = "/dashboard"
+      url.pathname = "/keywords"
       return NextResponse.redirect(url)
     }
   } else {

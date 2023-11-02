@@ -26,7 +26,8 @@ how to start project ?
     - ```email: admin@example.com password: password```
     - ```email: user@example.com password: password```
     - or **sign_up** by yourself
-  4. **sign_in** and enjoy kub !! 😁
+  4. normally, frontend run in port 3000 (http://localhost:3000/) 
+  5. **sign_in** and enjoy kub !! 😁
 
 ---
 

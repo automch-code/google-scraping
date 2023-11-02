@@ -10,6 +10,8 @@
       - (https://linuxhint.com/install-make-ubuntu/)
     - mac
       - ```brew install make```
+  - pnpm
+    - pnpm installation guide (https://pnpm.io/installation)
   - docker
     - installation (https://docs.docker.com/engine/install/#desktop)
 ---
@@ -26,8 +28,9 @@ how to start project ?
     - ```email: admin@example.com password: password```
     - ```email: user@example.com password: password```
     - or **sign_up** by yourself
-  4. normally, frontend run in port 3000 (http://localhost:3000/) 
-  5. **sign_in** and enjoy kub !! 😁
+  4. run pnpm inside frontend/ to get node_module `cd frontend/ && pnpm install && cd ..`
+  5. normally, frontend run in port 3000 (http://localhost:3000/) 
+  6. **sign_in** and enjoy kub !! 😁
 
 ---
 

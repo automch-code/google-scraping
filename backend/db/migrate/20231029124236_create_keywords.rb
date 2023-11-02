@@ -15,6 +15,9 @@ class CreateKeywords < ActiveRecord::Migration[7.0]
       t.string  :rep_results
       t.string  :rep_speed
 
+      # html text
+      t.text    :html_text
+
       t.timestamps
     end
 

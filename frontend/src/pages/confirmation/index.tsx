@@ -12,8 +12,6 @@ const Confirmation: NextPage = () => {
 
   const onSubmit = async () => {
     try {
-      debugger
-      console.log(confirmation_token)
       await confirmation({ confirmation_token }).unwrap()
       router.push('/sign_in')
     } catch (error: any) { }

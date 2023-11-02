@@ -13,13 +13,11 @@ export const userAPI = appAPI.injectEndpoints({
         invalidatesTags: ['User']
       }),
       RegisterUser: builder.mutation({
-        query: (body) => { 
-          console.log(body)
-          return ({
+        query: (body) => ({
           url: '/api/v1/users/registration',
           method: 'POST',
           body: body
-        })},
+        }),
         invalidatesTags: ['User']
       })
     }

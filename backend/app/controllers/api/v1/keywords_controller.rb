@@ -1,5 +1,6 @@
 class Api::V1::KeywordsController < ApplicationController
-  
+  before_action :find_keyword,       only: [:show]
+
   def index
     keywords = Keyword.where(filter)
       .where(user_id: current_user.id)
@@ -11,7 +12,16 @@ class Api::V1::KeywordsController < ApplicationController
     render_ok(count: keywords.size, keywords:)
   end
 
+  def show
+    render_ok(keyword: @keyword.as_json)
+  end
+
   private
+
+  def find_keyword
+    @keyword = Keyword.find_by(id: params[:id])
+    render_not_found unless @keyword
+  end
 
   def order_list
     order_query = nil

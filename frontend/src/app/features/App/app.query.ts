@@ -6,7 +6,7 @@ const reducerPath = 'appAPI'
 export const appAPI = createApi({
   reducerPath,
   baseQuery: customFetchBase,
-  tagTypes: ['Auth', 'User'],
+  tagTypes: ['Auth', 'User', 'Keyword'],
   extractRehydrationInfo(action, { reducerPath }) {
     if (action.type === HYDRATE) {
       return action.payload[reducerPath]

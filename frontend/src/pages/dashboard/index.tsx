@@ -138,7 +138,7 @@ const Dashboard: NextPage = () => {
   const columns = [
     {
       id: "id",
-      align: "center",
+      align: "left",
       label: t("ID"),
       hide: false,
     },
@@ -345,7 +345,7 @@ const Dashboard: NextPage = () => {
                   component="div"
                   rowsPerPage={limit}
                   page={page}
-                  count={data?.count || 1}
+                  count={-1}
                   onPageChange={handleChangePage}
                   onRowsPerPageChange={handleChangeRowsPerPage}
                 />

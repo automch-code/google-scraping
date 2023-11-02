@@ -4,19 +4,19 @@ class CreateKeywords < ActiveRecord::Migration[7.0]
       t.string  :word
       
       # sort value
-      t.integer :adwords
-      t.integer :links
-      t.decimal :results
-      t.decimal :speed
+      t.integer :adwords, default: 0
+      t.integer :links,   default: 0
+      t.decimal :results, default: 0
+      t.decimal :speed,   default: 0
       
       # represent value
-      t.string  :rep_adwords
-      t.string  :rep_links
-      t.string  :rep_results
-      t.string  :rep_speed
+      t.string  :rep_adwords, default: ''
+      t.string  :rep_links,   default: ''
+      t.string  :rep_results, default: ''
+      t.string  :rep_speed,   default: ''
 
       # html text
-      t.text    :html_text
+      t.text    :html_text,   default: ''
 
       t.timestamps
     end

@@ -5,16 +5,18 @@ RSpec.describe Keyword, type: :model do
     it { should have_db_column(:word).of_type(:string) }
     it { should have_db_column(:adwords).of_type(:integer) }
     it { should have_db_column(:links).of_type(:integer) }
-    it { should have_db_column(:results).of_type(:integer) }
+    it { should have_db_column(:results).of_type(:decimal) }
     it { should have_db_column(:speed).of_type(:decimal) }
     it { should have_db_column(:rep_adwords).of_type(:string) }
     it { should have_db_column(:rep_links).of_type(:string) }
     it { should have_db_column(:rep_results).of_type(:string) }
     it { should have_db_column(:rep_speed).of_type(:string) }
+    it { should have_db_column(:html_text).of_type(:text) }
+    it { should have_db_index(:user_id) }
+    it { should have_db_index([:word, :user_id]).unique(true) }
   end
 
   describe 'Associations' do
     it { should belong_to(:user) }
-    it { should have_one_attached(:html_file) }
   end
 end

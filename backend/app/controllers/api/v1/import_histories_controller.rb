@@ -3,7 +3,13 @@ require 'csv'
 class Api::V1::ImportHistoriesController < ApplicationController
 
   def index
-    import_histories = ImportHistory.where(user_id: current_user.id)
+    import_histories = ImportHistory.where(filter)
+      .where(user_id: current_user.id)
+      .limit(limit)
+      .order(order_list)
+      .offset(offset)
+      .as_json
+
     render_ok({import_hisotry: import_histories.as_json})
   end
 
@@ -49,5 +55,25 @@ class Api::V1::ImportHistoriesController < ApplicationController
     end
     
     return true
+  end
+
+  def order_list
+    order_query = nil
+
+    if params[:updated_at].present?
+      order_query = "updated_at #{params[:updated_at].upcase}"
+    else
+      order_query = "created_at #{params[:created_at] || 'DESC'}"
+    end
+
+    order_query
+  end
+
+  def filter
+    return {} if params[:query].blank?
+
+    [
+      'import_histories.filename'
+    ].map { |attr| "#{attr} LIKE '%#{ImportHistory.sanitize_sql_like(params[:query].strip)}%'" }.join(' OR ')
   end
 end

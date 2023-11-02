@@ -38,6 +38,123 @@ RSpec.describe "Api::V1::ImportHistories", type: :request do
         expect(result["import_hisotry"].size).to eq(0)
       end
     end
+
+    context 'when search import_history' do
+      before do
+        FactoryBot.create(:import_history, filename: 'cat',user_id: user_1.id)
+        FactoryBot.create(:import_history, filename: 'dog',user_id: user_1.id)
+        FactoryBot.create(:import_history, filename: 'category',user_id: user_1.id)
+      end
+
+      it 'return 200 (ok)' do
+        get '/api/v1/import_histories?query=cat', headers: headers_1
+
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'return import_histories that contain "cat"' do
+        get '/api/v1/import_histories?query=cat', headers: headers_1
+
+        result = JSON.parse(response.body)
+        expect(result["import_hisotry"].size).to eq(2)
+      end
+    end
+
+    context 'when sort by created_at' do
+      before do
+        FactoryBot.create(:import_history, filename: 'cat',user_id: user_1.id)
+        FactoryBot.create(:import_history, filename: 'dog',user_id: user_1.id)
+        FactoryBot.create(:import_history, filename: 'category',user_id: user_1.id)
+      end
+
+      context 'with Descending (DESC)' do
+        it 'return 200 (ok)' do
+        get '/api/v1/import_histories?created_at=DESC', headers: headers_1
+
+          expect(response).to have_http_status(:ok)
+        end
+
+        it 'return 3 import_histories with descending id' do
+          get '/api/v1/import_histories?created_at=DESC', headers: headers_1
+
+          result = JSON.parse(response.body)
+          expect(result["import_hisotry"].size).to eq(3)
+          expect(result["import_hisotry"].map{ _1["id"] }).to eq([3, 2, 1])
+        end
+
+        it 'return 3 import_histories with descending id' do
+          get '/api/v1/import_histories?created_at=DESC', headers: headers_1
+
+          result = JSON.parse(response.body)
+          expect(result["import_hisotry"].size).to eq(3)
+          expect(result["import_hisotry"].map{ _1["id"] }).to eq([3, 2, 1])
+        end
+      end
+
+      context 'with Ascending (ASC)' do
+        it 'return 200 (ok)' do
+        get '/api/v1/import_histories?created_at=ASC', headers: headers_1
+
+          expect(response).to have_http_status(:ok)
+        end
+
+        it 'return 3 import_histories with ascending id' do
+          get '/api/v1/import_histories?created_at=ASC', headers: headers_1
+
+          result = JSON.parse(response.body)
+          expect(result["import_hisotry"].size).to eq(3)
+          expect(result["import_hisotry"].map{ _1["id"] }).to eq([1, 2, 3])
+        end
+
+        it 'return 3 import_histories with ascending id' do
+          get '/api/v1/import_histories?created_at=ASC', headers: headers_1
+
+          result = JSON.parse(response.body)
+          expect(result["import_hisotry"].size).to eq(3)
+          expect(result["import_hisotry"].map{ _1["id"] }).to eq([1, 2, 3])
+        end
+      end
+    end
+
+    context 'when sort by updated_at' do
+      before do
+        FactoryBot.create(:import_history, filename: 'cat',user_id: user_1.id)
+        FactoryBot.create(:import_history, filename: 'dog',user_id: user_1.id)
+        FactoryBot.create(:import_history, filename: 'category',user_id: user_1.id)
+      end
+
+      context 'with Descending (DESC)' do
+        it 'return 200 (ok)' do
+          get '/api/v1/import_histories?updated=DESC', headers: headers_1
+
+          expect(response).to have_http_status(:ok)
+        end
+
+        it 'return 3 import_histories with descending id' do
+          get '/api/v1/import_histories?updated=DESC', headers: headers_1
+
+          result = JSON.parse(response.body)
+          expect(result["import_hisotry"].size).to eq(3)
+          expect(result["import_hisotry"].map{ _1["id"] }).to eq([3, 2, 1])
+        end
+      end
+
+      context 'with Ascending (ASC)' do
+        it 'return 200 (ok)' do
+          get '/api/v1/import_histories?updated_at=ASC', headers: headers_1
+
+          expect(response).to have_http_status(:ok)
+        end
+
+        it 'return 3 import_histories with ascending id' do
+          get '/api/v1/import_histories?updated_at=ASC', headers: headers_1
+
+          result = JSON.parse(response.body)
+          expect(result["import_hisotry"].size).to eq(3)
+          expect(result["import_hisotry"].map{ _1["id"] }).to eq([1, 2, 3])
+        end
+      end
+    end
   end
 
   describe "POST /upload" do

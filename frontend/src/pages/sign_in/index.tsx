@@ -109,12 +109,7 @@ const SignIn: NextPage = () => {
               >
                 {t('signIn')}
               </LoadingButton>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="/forgot_password" variant="body2">
-                    {t('forgotPassword?')}
-                  </Link>
-                </Grid>
+              <Grid container justifyContent="flex-end">
                 <Grid item>
                   <Link href="/sign_up" variant="body2">
                     {t('toSignUp')}

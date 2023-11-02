@@ -19,8 +19,11 @@
     "links": "Links",
     "keywordTitle": "Keyword: {{word}}",
     "preview": "Preview",
-    "dashBoard": "Dashboard",
+    "keywords": "Keywords",
+    "filename": "Filename",
+    "csvFile": "CSV",
     "importHistory": "Import History",
+    "upload": "Upload File",
     "error": {
       "invalid": "{{name}} invalid.",
       "blank": "{{name}} can't be blank.",

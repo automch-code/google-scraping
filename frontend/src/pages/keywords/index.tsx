@@ -19,7 +19,8 @@ import {
   TableCell,
   TableCellProps,
   TableBody,
-  TablePagination
+  TablePagination,
+  Typography
 } from "@mui/material"
 import ClearIcon from '@mui/icons-material/Clear';
 import ImportExportIcon from '@mui/icons-material/ImportExport';
@@ -33,6 +34,7 @@ import { useTranslation } from "react-i18next";
 import { isEmpty, debounce } from "lodash"
 import { useGetKeywordsQuery, useUploadMutation } from "@/app/features/App/Api"
 import SkeletonTable from "@/components/SkeletonTable";
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 const WhiteboxButton = styled(Button)<ButtonProps>(({ theme }) => ({
   color: theme.palette.getContrastText('#FFFFFF'),
@@ -65,7 +67,6 @@ const Dashboard: NextPage = () => {
   const [createDateSort, setCreateDateSort] = useState("DESC")
   const [updateDateSort, setUpdateDateSort] = useState("")
 
-  //FIXME Need to refactor line 69 - 203
   const dateTimeToRead = (dateTimeStr: string) => {
     var datetime = new Date(dateTimeStr)
     return datetime.toLocaleString('en-TH', { timeZone: 'Asia/Bangkok' })
@@ -224,7 +225,6 @@ const Dashboard: NextPage = () => {
         enqueueSnackbar(res["message"], { variant: "success" })
       } catch (error: any) {
         if (!!error) {
-          console.log(error)
           enqueueSnackbar("Upload Faild", { variant: "error" })
         }
       }
@@ -234,10 +234,13 @@ const Dashboard: NextPage = () => {
   return (
     <PrivateLayout>
       <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
+        <Typography variant="body2" gutterBottom>
+          {formik.values.file[0] == undefined ? '' : formik.values.file[0].name}
+        </Typography>
         <Stack spacing={2} direction="row">
           <label htmlFor="file">
-            <Button variant="contained" component="label">
-              Upload File
+            <Button variant="contained" component="label" startIcon={<CloudUploadIcon />}>
+              {t('upload')}
               <input
                 type="file"
                 multiple

@@ -36,10 +36,7 @@ export default function PrivateLayout({
   }
 
   const { email } = useAppSelector(
-    (state: { app: CurrentUser }) => {
-      console.log(state.app)
-      return state.app
-    }
+    (state: { app: CurrentUser }) => state.app
   )
 
   const router = useRouter()

@@ -5,10 +5,8 @@ import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import AccountCircle from '@mui/icons-material/AccountCircle'
 import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import { useAppSelector } from '@/app/hooks'
+import GTranslateIcon from '@mui/icons-material/GTranslate';
 import { useTranslation } from 'react-i18next'
 import { compact, get } from 'lodash'
 import { useRouter } from 'next/router'
@@ -19,9 +17,9 @@ export default function Drawer() {
 
   const list = compact(Object.entries({
     users: {
-      name: t('dashBoard'),
-      icon: <DashboardIcon />,
-      path: '/dashboard'
+      name: t('keywords'),
+      icon: <GTranslateIcon />,
+      path: '/keywords'
     },
     import: {
       name: t('importHistory'),

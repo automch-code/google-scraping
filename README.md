@@ -6,7 +6,8 @@
   - node version 
     - 18.16.0
   - make command
-    - ubuntu (https://linuxhint.com/install-make-ubuntu/)
+    - ubuntu
+      - (https://linuxhint.com/install-make-ubuntu/)
     - mac
       - ```brew install make```
   - docker

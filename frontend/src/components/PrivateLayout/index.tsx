@@ -35,8 +35,11 @@ export default function PrivateLayout({
     setMobileOpen(!mobileOpen)
   }
 
-  const { username } = useAppSelector(
-    (state: { app: CurrentUser }) => state.app
+  const { email } = useAppSelector(
+    (state: { app: CurrentUser }) => {
+      console.log(state.app)
+      return state.app
+    }
   )
 
   const router = useRouter()
@@ -54,15 +57,6 @@ export default function PrivateLayout({
     } catch (error: any) {
       console.log(error)
     }
-  }
-
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-  const open = Boolean(anchorEl)
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget)
-  }
-  const handleClose = () => {
-    setAnchorEl(null)
   }
 
   return (
@@ -96,7 +90,7 @@ export default function PrivateLayout({
               startIcon={<AccountCircle />}
               onClick={() => router.push("/")}
             >
-              {username}
+              Hi, {email}
             </Button>
             <IconButton
               size="large"

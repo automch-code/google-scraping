@@ -29,7 +29,6 @@ function MyApp(props: MyAppProps) {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    console.log("asdfasf")
     if (!isEmpty(user)) dispatch(setUserState(user as CurrentUser))
   }, [user, dispatch])
 
@@ -59,4 +58,4 @@ MyApp.getInitialProps = wrapper.getInitialAppProps(
   }
 )
 
-export default wrapper.withRedux(App)
+export default wrapper.withRedux(MyApp)

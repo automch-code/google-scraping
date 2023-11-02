@@ -11,10 +11,8 @@ import {
 import { AuthState, CurrentUser } from '@/utils/interface'
 
 export const initialState: CurrentUser = {
-  username: '',
-  profile_image: '',
-  role: '',
-  permissions: {}
+  email: '',
+  role: ''
 }
 
 const reducerName = 'app'
@@ -24,9 +22,7 @@ export const appSlice = createSlice({
   initialState,
   reducers: {
     setUserState: (state, { payload }: PayloadAction<CurrentUser>) => {
-      state.username = payload.username
-      state.profile_image = payload.profile_image
-      state.permissions = payload.permissions
+      state.email = payload.email
       state.role = payload.role
     },
     setAuthState: (state, { payload }: PayloadAction<AuthState>) => {
@@ -35,9 +31,7 @@ export const appSlice = createSlice({
       setRefreshToken(payload.refresh_token)
     },
     clearAuthState(state) {
-      state.username = initialState.username
-      state.profile_image = initialState.profile_image
-      state.permissions = initialState.permissions
+      state.email = initialState.email
       state.role = initialState.role
       destroyCurrentUser()
       destroyAccessToken()
@@ -55,9 +49,7 @@ export const appSlice = createSlice({
     ).addMatcher(
       authAPI.endpoints.signOut.matchFulfilled,
       (state) => {
-        state.username = initialState.username
-        state.profile_image = initialState.profile_image
-        state.permissions = initialState.permissions
+        state.email = initialState.email
         state.role = initialState.role
         destroyCurrentUser()
         destroyAccessToken()

@@ -1,4 +1,4 @@
-**Google-Scraping**
+**Google-Scraping** 💻 
 
 - requirements
   - ruby version 
@@ -25,7 +25,7 @@ how to start project ?
     - ```email: admin@example.com password: password```
     - ```email: user@example.com password: password```
     - or **sign_up** by yourself
-  4. **sign_in** and enjoy kub !! :)
+  4. **sign_in** and enjoy kub !! 😁
 
 ---
 

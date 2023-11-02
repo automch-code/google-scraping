@@ -48,6 +48,9 @@ class GoogleScraper < ApplicationService
       report[:links] = doc.xpath('//a').size
       report[:rep_links] = doc.xpath('//a').size.to_s
 
+      # html_text
+      report[:html_text] = prepend_fqdn(html)
+
       report
     end
   end
@@ -65,7 +68,14 @@ class GoogleScraper < ApplicationService
       rep_links:  '',
       rep_results:  '',
       rep_speed:  '',
+      html_text: '',
       user_id: @user_id
     }
+  end
+
+  def prepend_fqdn(html)
+    html.gsub!('href="/search?', 'href="https://www.google.com/search?')
+    html.gsub!('content="/', 'content="https://www.google.com/')
+    html.gsub!('src="/images', 'src="https://www.google.com/images')
   end
 end

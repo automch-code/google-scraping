@@ -5,8 +5,6 @@ export interface AuthState {
 }
 
 export interface CurrentUser {
-  username: string
-  profile_image: string
+  email: string,
   role: string
-  permissions: any
 }

@@ -11,11 +11,18 @@ export const keywordAPI = appAPI.injectEndpoints({
             params
           }
         }
-      })
+      }),
+      getKeyword: builder.query({
+        query: (id) => ({
+          url: `/api/v1/keywords/${id}`,
+        }),
+        providesTags: ['Keyword']
+      }),
     }
   }
 })
 
 export const {
-  useGetKeywordsQuery
+  useGetKeywordsQuery,
+  useGetKeywordQuery
 } = keywordAPI

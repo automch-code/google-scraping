@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import NextLink from 'next/link'
 import PrivateLayout from "@/components/PrivateLayout"
 import {
   Button,
@@ -316,7 +317,14 @@ const Dashboard: NextPage = () => {
                               return (
                                 <TableRow key={row.id}>
                                   <TableCell component="th">{row.id}</TableCell>
-                                  <TableCell component="th">{row.word}</TableCell>
+                                  <TableCell component="th">
+                                    <NextLink
+                                      key={row.id}
+                                      href={`/keywords/${row.id}`}
+                                    >
+                                      {row.word}
+                                    </NextLink>
+                                  </TableCell>
                                   <TableCell component="th">{dateTimeToRead(row.created_at)}</TableCell>
                                   <TableCell component="th">{dateTimeToRead(row.updated_at)}</TableCell>
                                   <TableCell component="th">{row.rep_results}</TableCell>

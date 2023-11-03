@@ -2,7 +2,7 @@
 
 - requirements
   - ruby version 
-    - 3.2.2
+    - 3.2.1
   - node version 
     - 18.16.0
   - make command
@@ -18,33 +18,33 @@
 
 how to start project ?
   1. to start project run
-    - ```make start```
+    - `$ make start`
     this command will start up all services in docker-compose.yml
   2. reset the database first to generate user
-    - ```make reset-db```
+    - `$ make reset-db`
     with this step you will get (admin_user, user)
     I add an admin_user for user management in the future...
   3. from previous step, you'll get 2 users
-    - ```email: admin@example.com password: password```
-    - ```email: user@example.com password: password```
+    - `email: admin@example.com password: password`
+    - `email: user@example.com password: password`
     - or **sign_up** by yourself
-  4. run pnpm inside frontend/ to get node_module `cd frontend/ && pnpm install && cd ..`
-  5. normally, frontend run in port 3000 (http://localhost:3000/) 
-  6. **sign_in** and enjoy kub !! 😁
+    - after you sign_up run `$ make link_email` and copy "http://localhost:3000/redirect..." and paste into the browser to confirm your account
+  4. normally, frontend run in port 3000 (http://localhost:3000/)
+  5. **sign_in** and enjoy kub !! 😁
 
 ---
 
 Make command
 - start project
-  - ```make start```
+  - `make start`
 - stop project
-  - ```make stop```
+  - `make stop`
 - restart project
-  - ```make restart```
+  - `make restart`
 - rebuild project
-  - ```make rebuild```
+  - `make rebuild`
 - to reset database to first state (2 users, without keywords)
-  - ```make reset-db```
+  - `make reset-db`
 
 ---
 

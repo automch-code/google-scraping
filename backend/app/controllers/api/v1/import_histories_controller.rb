@@ -1,6 +1,7 @@
 require 'csv'
 
 class Api::V1::ImportHistoriesController < ApplicationController
+  before_action :upload_validation,         only: [:upload]
 
   def index
     import_histories = ImportHistory.where(filter)
@@ -14,17 +15,9 @@ class Api::V1::ImportHistoriesController < ApplicationController
   end
 
   def upload
-    return render_bad_request(message: t('errors.file_not_found')) if import_params["file"].nil?
-
-    import_file = import_params[:file]
-    filename = import_file.original_filename
-    return render_bad_request(
-      message: t('errors.file_type_invalid')
-    ) unless is_import_csv(import_file)
-
     import = ImportHistory.new(
       import_params.merge({
-        filename:,
+        filename: import_params[:file].original_filename,
         user_id: current_user.id
       }))
 
@@ -45,16 +38,16 @@ class Api::V1::ImportHistoriesController < ApplicationController
     params.require(:import).permit(%i[file])
   end
 
-  def is_import_csv(csv)
+  def upload_validation
+    return render_bad_request(message: t('errors.file_not_found')) if import_params[:file].nil?
+
     begin
-      CSV.read(csv)
+      CSV.read(import_params[:file])
     rescue CSV::MalformedCSVError => e
       log_error(e)
 
-      return false
+      return render_bad_request(message: t('errors.file_type_invalid'))
     end
-    
-    return true
   end
 
   def order_list

@@ -41,7 +41,7 @@ services:
       dockerfile: frontend/Dockerfile
       args:
         - NODE_ENV=${NODE_ENV:-development}
-    container_name: frontend
+    container_name: google-scraping-frontend
     env_file: frontend/environments/development
     volumes:
       - ./frontend:/app

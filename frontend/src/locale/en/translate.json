@@ -24,6 +24,7 @@
     "csvFile": "CSV",
     "importHistory": "Import History",
     "upload": "Upload File",
+    "status": "Status",
     "error": {
       "invalid": "{{name}} invalid.",
       "blank": "{{name}} can't be blank.",

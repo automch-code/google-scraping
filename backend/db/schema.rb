@@ -44,6 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_29_150942) do
 
   create_table "import_histories", force: :cascade do |t|
     t.string "filename"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"

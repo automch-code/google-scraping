@@ -10,6 +10,12 @@ export const importAPI = appAPI.injectEndpoints({
           params
         })
       }),
+      getStatus: builder.query({
+        query: ({ id }) => ({
+          url: `/api/v1/import_histories/${id}`,
+          method: 'GET'
+        })
+      }),
       upload: builder.mutation({
         query: (body) => {
           return {
@@ -25,5 +31,6 @@ export const importAPI = appAPI.injectEndpoints({
 
 export const {
   useGetImportsQuery,
+  useGetStatusQuery,
   useUploadMutation
 } = importAPI

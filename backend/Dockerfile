@@ -1,4 +1,4 @@
-FROM ruby:3.2.2-bullseye
+FROM ruby:3.2.1-bullseye
 
 RUN apt-get update -qq && apt install -y libvips
 WORKDIR /app

@@ -2,6 +2,7 @@ class CreateImportHistories < ActiveRecord::Migration[7.0]
   def change
     create_table :import_histories do |t|
       t.string :filename
+      t.integer :status, default: 0
 
       t.timestamps
     end

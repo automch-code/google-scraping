@@ -153,6 +153,12 @@ const Dashboard: NextPage = () => {
       align: "left",
       label: t("updateDate"),
       hide: false,
+    },
+    {
+      id: "status",
+      align: "left",
+      label: t("status"),
+      hide: false,
     }
   ]
 
@@ -247,7 +253,7 @@ const Dashboard: NextPage = () => {
                                 <TableCell component="th">{row.filename}</TableCell>
                                 <TableCell component="th">{dateTimeToRead(row.created_at)}</TableCell>
                                 <TableCell component="th">{dateTimeToRead(row.updated_at)}</TableCell>
-                                <TableCell component="th">{row.file}</TableCell>
+                                <TableCell component="th">{row.status}</TableCell>
                               </TableRow>
                             );
                           })

@@ -6,12 +6,18 @@ class ImportKeywordsJob < ApplicationJob
 
 
   def perform(*args)
-    import_history = args[0]
-    current_user_id = args[1].id
-    import_history.file.open do |file|
-      csv = CSV.read(file)
+    begin
+      import_history = args[0]
+      current_user_id = args[1].id
+      import_history.file.open do |file|
+        csv = CSV.read(file)
+        Keyword.upsert_all(GoogleScraper.call(csv.flatten, current_user_id), unique_by: %i[word user_id])
+      end
 
-      Keyword.upsert_all(GoogleScraper.call(csv.flatten, current_user_id), unique_by: %i[word user_id])
+      import_history.update(status: :success)
+    rescue Exception => e
+
+      import_history.update(status: :failed)
     end
   end
 end

@@ -19,6 +19,6 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby-version }}
       - name: Install dependencies
-        run: bundle install
+        run: cd backend && bundle install
       - name: Run tests
-        run: bundle exec rspec spec
+        run: cd backend && bundle exec rspec spec

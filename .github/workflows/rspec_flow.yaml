@@ -19,7 +19,7 @@ jobs:
         image: postgres:15-alpine
         # Provide the password for postgres
         env:
-          POSTGRES_HOST: db
+          POSTGRES_HOST: localhost
           POSTGRES_PORT: 5432
           POSTGRES_DB: google_scraping_test
           POSTGRES_USER: postgres
@@ -34,6 +34,6 @@ jobs:
       - name: Install dependencies
         run: cd backend && bundle install
       - name: setup database
-        run: cd backend && bundle exec rails db:drop db:create db:migrate
+        run: cd backend && RAILS_ENV=test bundle exec rails db:drop db:create db:migrate
       - name: Run tests
-        run: cd backend && bundle exec rspec spec
+        run: cd backend && RAILS_ENV=test bundle exec rspec spec

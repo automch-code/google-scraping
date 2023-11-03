@@ -12,6 +12,19 @@ jobs:
     strategy:
       matrix:
         ruby-version: ['3.2.1']
+    services:
+      # Label used to access the service container
+      db:
+        # Docker Hub image
+        image: postgres:15-alpine
+        # Provide the password for postgres
+        env:
+          POSTGRES_HOST: db
+          POSTGRES_PORT: 5432
+          POSTGRES_DB: google_scraping_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+
     steps:
       - uses: actions/checkout@v4
       - name: Set up Ruby ${{ matrix.ruby-version }}
@@ -20,5 +33,7 @@ jobs:
           ruby-version: ${{ matrix.ruby-version }}
       - name: Install dependencies
         run: cd backend && bundle install
+      - name: setup database
+        run: cd backend && bundle exec rails db:drop db:create db:migrate
       - name: Run tests
         run: cd backend && bundle exec rspec spec

@@ -33,6 +33,8 @@ en:
   import_history:
     processing: "Import '%{filename}' in processing..."
 
+  not_found: "Not found."
+
   errors:
     file_not_found: "File not found."
     file_type_invalid: "The file format is invalid. (use CSV)"

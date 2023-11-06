@@ -193,8 +193,23 @@ RSpec.describe "Api::V1::Keywords", type: :request do
     context 'when keywords not exist' do
       it 'return 404 (not found)' do
         get '/api/v1/keywords/1', headers: headers_1
-
+        
+        result = JSON.parse(response.body)
         expect(response).to have_http_status(:not_found)
+        expect(result["message"]).to eq('Not found.')
+      end
+    end
+
+    context 'when user_1 search keyword of user_2' do
+      let!(:cat)                  { FactoryBot.create(:keyword, word: 'cat', links: 5, user_id: user_1.id) }
+      let!(:dog)                  { FactoryBot.create(:keyword, word: 'dog', links: 12, user_id: user_2.id) }
+
+      it 'return 404 (not found)' do
+        get "/api/v1/keywords/#{dog.id}", headers: headers_1
+
+        result = JSON.parse(response.body)
+        expect(response).to have_http_status(:not_found)
+        expect(result["message"]).to eq('Not found.')
       end
     end
   end

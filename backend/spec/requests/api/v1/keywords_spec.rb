@@ -5,10 +5,16 @@ RSpec.describe "Api::V1::Keywords", type: :request do
   let!(:user_1)         { FactoryBot.create(:user) }
   let!(:token_1)        { FactoryBot.create(:access_token, application:, resource_owner_id: user_1.id) }
   let!(:headers_1)      { { Authorization: "Bearer #{token_1.token}" } }
+  let!(:user_2)         { FactoryBot.create(:user) }
+  let!(:token_2)        { FactoryBot.create(:access_token, application:, resource_owner_id: user_2.id) }
+  let!(:headers_2)      { { Authorization: "Bearer #{token_2.token}" } }
 
   describe "GET /index" do
     context 'when keywords exist' do
-      before { FactoryBot.create_list(:keyword, 2 ,user_id: user_1.id) }
+      before do 
+        FactoryBot.create_list(:keyword, 2 ,user_id: user_1.id)
+        FactoryBot.create_list(:keyword, 5 ,user_id: user_2.id)
+      end
 
       it 'return 200 (ok)' do
         get '/api/v1/keywords', headers: headers_1
@@ -16,11 +22,18 @@ RSpec.describe "Api::V1::Keywords", type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      it 'return keywords for user_1' do
+      it 'return 2 keywords for user_1' do
         get '/api/v1/keywords', headers: headers_1
         
         result = JSON.parse(response.body)
         expect(result["keywords"].size).to eq(2)
+      end
+
+      it 'return 5 keywords for user_2' do
+        get '/api/v1/keywords', headers: headers_2
+        
+        result = JSON.parse(response.body)
+        expect(result["keywords"].size).to eq(5)
       end
     end
 

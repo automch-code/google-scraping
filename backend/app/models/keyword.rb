@@ -8,7 +8,6 @@ class Keyword < ApplicationRecord
   private
 
   def update_result
-    result = GoogleScraper.call(self.word)
-    self.update_columns(result)
+    ScrapingJob.perform_later(self)
   end
 end

@@ -231,7 +231,11 @@ const Dashboard: NextPage = () => {
         enqueueSnackbar(res["message"], { variant: "success" })
       } catch (error: any) {
         if (!!error) {
-          enqueueSnackbar("Upload Faild", { variant: "error" })
+          if(error.data["message"] == undefined){
+            enqueueSnackbar(`Upload Faild: select file before upload`, { variant: "error" })
+          }else {
+            enqueueSnackbar(`Upload Faild: ${error.data["message"]}`, { variant: "error" })
+          }
         }
       }
     },

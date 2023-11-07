@@ -3,6 +3,8 @@ require 'csv'
 class Api::V1::ImportHistoriesController < ApplicationController
   before_action :upload_validation,         only: [:upload]
 
+  MAX_KEYWORD = 100
+
   def index
     import_histories = ImportHistory.where(filter)
       .where(user_id: current_user.id)
@@ -42,12 +44,14 @@ class Api::V1::ImportHistoriesController < ApplicationController
     return render_bad_request(message: t('errors.file_not_found')) if import_params[:file].nil?
 
     begin
-      CSV.read(import_params[:file])
+      csv_file = CSV.read(import_params[:file])
     rescue CSV::MalformedCSVError => e
       log_error(e)
 
       return render_bad_request(message: t('errors.file_type_invalid'))
     end
+
+    return render_bad_request(message: t('errors.maximum_keywords')) if csv_file.flatten.size > MAX_KEYWORD
   end
 
   def order_list

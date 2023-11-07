@@ -185,6 +185,12 @@ const Dashboard: NextPage = () => {
       label: t("links"),
       hide: false,
     },
+    {
+      id: "status",
+      align: "left",
+      label: t("status"),
+      hide: false,
+    },
   ]
 
   const changeParams = (params: any) => {
@@ -334,6 +340,7 @@ const Dashboard: NextPage = () => {
                                   <TableCell component="th">{row.rep_speed}</TableCell>
                                   <TableCell component="th">{row.rep_adwords}</TableCell>
                                   <TableCell component="th">{row.rep_links}</TableCell>
+                                  <TableCell component="th">{row.status}</TableCell>
                                 </TableRow>
                               );
                             })

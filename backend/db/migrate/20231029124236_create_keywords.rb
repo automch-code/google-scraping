@@ -17,6 +17,7 @@ class CreateKeywords < ActiveRecord::Migration[7.0]
 
       # html text
       t.text    :html_text,   default: ''
+      t.integer :status,  default: 0
 
       t.timestamps
     end

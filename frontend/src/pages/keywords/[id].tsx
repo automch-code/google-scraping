@@ -82,7 +82,7 @@ const Keyword = () => {
               <Item>
                 <SpeedIcon />
                 <Typography component="h1" variant="h5" sx={{ color: "text.primary" }}>
-                  {data.keyword.rep_speed} 
+                  {data.keyword.rep_speed || '0.0'}
                 </Typography>
                 <Typography component="h1" variant="h5" sx={{ color: "text.primary" }}>
                   {t('speed')}

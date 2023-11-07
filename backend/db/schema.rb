@@ -62,6 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_29_150942) do
     t.string "rep_results", default: ""
     t.string "rep_speed", default: ""
     t.text "html_text", default: ""
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"

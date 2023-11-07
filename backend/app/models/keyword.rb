@@ -3,11 +3,11 @@ class Keyword < ApplicationRecord
 
   belongs_to :user
 
-  after_save :update_result
+  after_commit :scrape_google_page,   on: :create
 
   private
 
-  def update_result
-    ScrapingJob.perform_later(self)
+  def scrape_google_page
+    ScrapingJob.set(wait: rand(60).seconds).perform_later(self)
   end
 end

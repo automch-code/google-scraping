@@ -13,7 +13,6 @@ RSpec.describe Keyword, type: :model do
     it { should have_db_column(:rep_speed).of_type(:string) }
     it { should have_db_column(:html_text).of_type(:text) }
     it { should have_db_index(:user_id) }
-    it { should have_db_index([:word, :user_id]).unique(true) }
   end
 
   describe 'Associations' do

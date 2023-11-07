@@ -20,18 +20,12 @@ class GoogleScraper < ApplicationService
         hl: 'en'
     }
 
-    begin
-      conn = Faraday.new(url: WEB_BASE_URL, headers: HEADERS)
-      response = conn.get('search?', query)
+    conn = Faraday.new(url: WEB_BASE_URL, headers: HEADERS)
+    response = conn.get('search?', query)
+
+    if response.status == 200
       html = response.body
 
-      if response.status == 302
-        report[:status] = :failed
-        
-        return report
-      end
-
-      sleep 5
       doc = Nokogiri::HTML(html)
 
       # result
@@ -53,13 +47,11 @@ class GoogleScraper < ApplicationService
       # html_text
       report[:html_text] = prepend_fqdn(html)
       report[:status] = :success
-      report
-    rescue Faraday::ClientError => e
-      Rails.logger.error(e.message)
-
+    else
       report[:status] = :failed
-      report
     end
+
+    report
   end
 
   private

@@ -23,6 +23,5 @@ class CreateKeywords < ActiveRecord::Migration[7.0]
     end
 
     add_reference :keywords, :user, foreign_key: true, null: true
-    add_index :keywords, [:word, :user_id], unique: true
   end
 end

@@ -17,11 +17,11 @@ class CreateKeywords < ActiveRecord::Migration[7.0]
 
       # html text
       t.text    :html_text,   default: ''
+      t.integer :status,  default: 0
 
       t.timestamps
     end
 
     add_reference :keywords, :user, foreign_key: true, null: true
-    add_index :keywords, [:word, :user_id], unique: true
   end
 end

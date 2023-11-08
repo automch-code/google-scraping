@@ -36,5 +36,6 @@ en:
   not_found: "Not found."
 
   errors:
+    maximum_keywords: "The maximum number of keywords allowed per upload is 100."
     file_not_found: "File not found."
     file_type_invalid: "The file format is invalid. (use CSV)"

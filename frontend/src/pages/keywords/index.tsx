@@ -185,6 +185,12 @@ const Dashboard: NextPage = () => {
       label: t("links"),
       hide: false,
     },
+    {
+      id: "status",
+      align: "left",
+      label: t("status"),
+      hide: false,
+    },
   ]
 
   const changeParams = (params: any) => {
@@ -225,7 +231,11 @@ const Dashboard: NextPage = () => {
         enqueueSnackbar(res["message"], { variant: "success" })
       } catch (error: any) {
         if (!!error) {
-          enqueueSnackbar("Upload Faild", { variant: "error" })
+          if(error.data["message"] == undefined){
+            enqueueSnackbar(`Upload Faild: select file before upload`, { variant: "error" })
+          }else {
+            enqueueSnackbar(`Upload Faild: ${error.data["message"]}`, { variant: "error" })
+          }
         }
       }
     },
@@ -334,6 +344,7 @@ const Dashboard: NextPage = () => {
                                   <TableCell component="th">{row.rep_speed}</TableCell>
                                   <TableCell component="th">{row.rep_adwords}</TableCell>
                                   <TableCell component="th">{row.rep_links}</TableCell>
+                                  <TableCell component="th">{row.status}</TableCell>
                                 </TableRow>
                               );
                             })

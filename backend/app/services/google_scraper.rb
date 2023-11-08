@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class GoogleScraper < ApplicationService
-  attr_reader :keywords
-  attr_reader :user_id
+  attr_reader :keyword
 
   WEB_BASE_URL = ENV['WEB_BASE_URL']
   HEADERS      = {
@@ -10,27 +9,24 @@ class GoogleScraper < ApplicationService
     "User-Agent"      => "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
   }
 
-  def initialize(keywords, user_id)
-    @user_id = user_id
-    @keywords = keywords
+  def initialize(keyword)
+    @keyword = keyword
   end
 
   def call
-    @keywords.map do |keyword|
-      report = initial_value()
-      query = {
-        q: keyword,
+    report = initial_value()
+    query = {
+        q: @keyword,
         hl: 'en'
-      }
+    }
 
-      conn = Faraday.new(url: WEB_BASE_URL, headers: HEADERS)
-      response = conn.get('search?', query)
+    conn = Faraday.new(url: WEB_BASE_URL, headers: HEADERS)
+    response = conn.get('search?', query)
+
+    if response.status == 200
       html = response.body
-      sleep 1
-      doc = Nokogiri::HTML(html)
 
-      # keyword
-      report[:word] = keyword
+      doc = Nokogiri::HTML(html)
 
       # result
       report[:results] = doc.css('#result-stats')[0].children[0].to_s.scan(/[0-9\,]+/)[0].gsub(',', '').to_i
@@ -50,16 +46,18 @@ class GoogleScraper < ApplicationService
 
       # html_text
       report[:html_text] = prepend_fqdn(html)
-
-      report
+      report[:status] = :success
+    else
+      report[:status] = :failed
     end
+
+    report
   end
 
   private
 
   def initial_value
     {
-      word: '',
       adwords: 0,
       links:  0,
       results:  0,
@@ -69,7 +67,7 @@ class GoogleScraper < ApplicationService
       rep_results:  '',
       rep_speed:  '',
       html_text: '',
-      user_id: @user_id
+      status: :pending
     }
   end
 

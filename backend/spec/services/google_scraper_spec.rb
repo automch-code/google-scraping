@@ -8,9 +8,9 @@ RSpec.describe GoogleScraper, type: :service do
 
   describe '#call' do
     it 'create keyword from word in csv' do
-      result = GoogleScraper.call(['cat'], user_1.id)
+      result = GoogleScraper.call('cat')
 
-      expect(result[0]).to be_present
+      expect(result).to be_present
     end
   end
 end

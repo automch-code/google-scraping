@@ -1,9 +1,6 @@
 require 'csv'
 
 class Api::V1::ImportHistoriesController < ApplicationController
-  before_action :upload_validation,         only: [:upload]
-
-  MAX_KEYWORD = 100
 
   def index
     import_histories = ImportHistory.where(filter)
@@ -17,6 +14,9 @@ class Api::V1::ImportHistoriesController < ApplicationController
   end
 
   def upload
+    csv_obj = CsvImport.new(import_params[:file])
+    return render_bad_request(message: csv_obj.errors.full_messages.join(', ')) if !csv_obj.valid?
+
     import = ImportHistory.new(
       import_params.merge({
         filename: import_params[:file].original_filename,
@@ -38,20 +38,6 @@ class Api::V1::ImportHistoriesController < ApplicationController
 
   def import_params
     params.require(:import).permit(%i[file])
-  end
-
-  def upload_validation
-    return render_bad_request(message: t('errors.file_not_found')) if import_params[:file].nil?
-
-    begin
-      csv_file = CSV.read(import_params[:file])
-    rescue CSV::MalformedCSVError => e
-      log_error(e)
-
-      return render_bad_request(message: t('errors.file_type_invalid'))
-    end
-
-    return render_bad_request(message: t('errors.maximum_keywords')) if csv_file.flatten.size > MAX_KEYWORD
   end
 
   def order_list

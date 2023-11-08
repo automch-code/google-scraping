@@ -230,5 +230,30 @@ RSpec.describe "Api::V1::ImportHistories", type: :request do
         expect(result["message"]).to eq('The file format is invalid. (use CSV)')
       end
     end
+
+    context 'when import more than 100 keywords' do
+      let(:keywords_100_file)  { Rack::Test::UploadedFile.new(fixture_file_path('100_keywords.csv')) }
+
+      it 'return 400 (bad_request)' do
+        post '/api/v1/import_histories/upload', headers: headers_1, params: {
+          import: {
+            file: keywords_100_file
+          }
+        }
+
+        expect(response).to have_http_status(:bad_request)
+      end
+      
+      it 'return with message "The maximum number of keywords allowed per upload is 100."' do
+        post '/api/v1/import_histories/upload', headers: headers_1, params: {
+          import: {
+            file: keywords_100_file
+          }
+        }
+
+        result = JSON.parse(response.body)
+        expect(result["message"]).to eq('The maximum number of keywords allowed per upload is 100.')
+      end
+    end
   end
 end

@@ -8,7 +8,7 @@ require 'rspec/rails'
 require 'shoulda-matchers'
 require 'support/database_cleaner'
 require 'support/fixture_helpers'
-
+require 'webmock/rspec'
 require 'simplecov'
 SimpleCov.start
 

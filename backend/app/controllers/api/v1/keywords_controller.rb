@@ -19,7 +19,7 @@ class Api::V1::KeywordsController < ApplicationController
   private
 
   def find_keyword
-    @keyword = Keyword.find_by(id: params[:id])
+    @keyword = Keyword.find_by(id: params[:id], user_id: current_user.id)
     render_not_found unless @keyword
   end
 

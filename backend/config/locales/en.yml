@@ -33,6 +33,8 @@ en:
   import_history:
     processing: "Import '%{filename}' in processing..."
 
+  not_found: "Not found."
+
   errors:
     maximum_keywords: "The maximum number of keywords allowed per upload is 100."
     file_not_found: "File not found."
